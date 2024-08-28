@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      AWS_IAM_ROLE_ARN: ${{ vars.AWS_IAM_ROLE_ARN }}
+      AWS_REGION: "ap-northeast-1"
+      AMPLIFY_APP_ID: ${{ vars.AMPLIFY_APP_ID }}
+      AMPLIFY_ENV_NAME: "main"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ env.AWS_IAM_ROLE_ARN }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: amplify-deploy
+        run: |
+          npm ci
+          npx ampx pipeline-deploy --branch ${{ env.AMPLIFY_ENV_NAME}} --appId ${{ env.AMPLIFY_APP_ID }} --debug
