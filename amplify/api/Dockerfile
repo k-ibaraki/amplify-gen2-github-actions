@@ -5,7 +5,7 @@ COPY . .
 
 EXPOSE 3000
 
-RUN npm install
+RUN npm ci
 RUN npx tsc
 
 ENTRYPOINT ["node", "dist/index.js"]
