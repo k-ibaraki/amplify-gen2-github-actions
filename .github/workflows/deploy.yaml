@@ -31,6 +31,7 @@ jobs:
         run: |
           echo "#install npm packages"
           npm ci
+          cd amplify/api && npm ci && cd -
       - name: backend deploy
         run: |
           echo "#amplify gen2 backend deploy"

@@ -6,7 +6,6 @@ COPY . .
 EXPOSE 3000
 
 RUN npm i typescript -g
-RUN npm i --save-dev @types/express
 RUN npm ci
 RUN tsc --noEmit --project tsconfig.json
 
