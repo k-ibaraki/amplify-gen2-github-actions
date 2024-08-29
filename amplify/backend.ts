@@ -21,7 +21,7 @@ const appRunnerService = new apprunner.Service(apiStack, 'AppRunnerApiService', 
   source: apprunner.Source.fromAsset({
     imageConfiguration: { port: 3000 },
     asset: asset,
-  })
+  }),
 });
 
 // App Runner ServiceのURLを出力
