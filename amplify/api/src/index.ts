@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // Get
 const router: express.Router = express.Router();
 router.get('/', (req: express.Request, res: express.Response) => {
-  res.send("Hello App Runner!");
+  res.send("Hello App Runner");
 });
 app.use(router);
 
